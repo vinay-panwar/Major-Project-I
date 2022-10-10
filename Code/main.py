@@ -129,7 +129,7 @@ def __init__() :
     if get not in randomList :
         get = 'Happy\n'
         print(get)
-    index =r.randint(0,len(randomList)-1)
+    # index =r.randint(0,len(randomList)-1)
     print("\n\nwhich genre to played : %s\n"%(get))
     # ask_song = 'Energetic'
     # find_song(sp,randomList[index])
@@ -137,7 +137,9 @@ def __init__() :
     # ask_song = 'Happy'
     # find_song(sp,ask_song)
 
-for i in range(2) :
+"""for i in range(2) :
     __init__()
     sleep(3)
-    print()
+    print()"""
+    
+__init__()
