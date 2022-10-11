@@ -4,6 +4,7 @@ from spotipy.oauth2 import SpotifyOAuth
 import cred
 import random as r
 import fileOpen as file
+# import NewOpenFile as file
 
 # list out all the songs could be played
 def show_songs(albums) :
@@ -25,7 +26,7 @@ def show_songs(albums) :
     except :
         print("do nothing ")
     # print(song_list)
-    x=0
+    """x=0
     for i in song_list :
         if  x < num_song :
             # print('{i} : {y}'(i,song_list[i]))
@@ -33,8 +34,12 @@ def show_songs(albums) :
         else :
             break
         x+=1
+        """
+    # songlist to return 
+    listCopy = song_list.copy()
     # clear the dictionary after using
     song_list.clear() 
+    return [listCopy,num_song]
     
 # show all the songs in album 
 def show_album(albums) :
@@ -58,16 +63,19 @@ def show_album(albums) :
     except :
         print("do nothing ")
     # print(song_list)
-    x=0
+    """x=0
     for i in song_list :
         if  x < num_song :
             # print('{i} : {y}'(i,song_list[i]))
             print(i,' : ',song_list[i])
         else :
             break
-        x+=1
+        x+=1"""
+    # songlist to return 
+    listCopy = song_list.copy()
     # clear the dictionary after using
     song_list.clear()
+    return [listCopy,num_song]
     
 # decide the spotify uri to the song
 def song(y) :
@@ -109,22 +117,27 @@ def find_song(sp,song_type) :
     get_song_link = song(song_type)
     get_song_link_list = get_song_link.split(sep=':')
     #print(get_song_link_list)
+    # songlist = None
     if get_song_link_list[1] == 'playlist' : 
         results = sp.playlist(get_song_link)
         print("Play list")
         albums = results['tracks']
-        show_songs(albums)
+        songlist =show_songs(albums)
+        # print(songlist)
+        return songlist
     else :
         results = sp.album(get_song_link)
         # do it incase of album
         print('album') 
         albums = results['tracks']
-        show_album(albums)
+        songlist=show_album(albums)
+        # print(songlist)
+        return songlist
+    
 
-def __init__() :    
+def __init__(get) :    
     sp = establish_connection()
     randomList = ['sadness\n','Happy\n','Calm','Energetic\n','joy\n','Natural']
-    get = file.getMood()
     print(get) 
     if get not in randomList :
         get = 'Happy\n'
@@ -133,13 +146,27 @@ def __init__() :
     print("\n\nwhich genre to played : %s\n"%(get))
     # ask_song = 'Energetic'
     # find_song(sp,randomList[index])
-    find_song(sp,get)
+    songs = find_song(sp,get)
     # ask_song = 'Happy'
     # find_song(sp,ask_song)
+    # songslist
+    songlist = songs[0]
+    # number of songs to show 
+    numberOfSongs = songs[1]
+    # print(songlist)
+    # print(numberOfSongs)
+    x=0
+    for i in songlist :
+        if  x < numberOfSongs :
+            # print('{i} : {y}'(i,song_list[i]))
+            print(i,' : ',songlist[i])
+        else :
+            break
+        x+=1
 
-"""for i in range(2) :
-    __init__()
-    sleep(3)
-    print()"""
-    
-__init__()
+# question 
+ques = file.getQuestion()
+print(ques[0])
+ans = input()
+mood = file.getMood(ques[1],ans)
+__init__(mood)
