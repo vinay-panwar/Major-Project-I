@@ -1,6 +1,6 @@
 from dataclasses import InitVar
 from inspect import Attribute
-from msilib.schema import RadioButton
+from msilib.schema import ListBox, RadioButton
 from multiprocessing import Value
 from pydoc import text
 from time import sleep
@@ -11,7 +11,7 @@ import fileOpen as file
 import NewMain as mod1
 
 # whole ui background
-bac = 'light gray'
+bac = 'Light gray'
 
 root = Tk()
 root.geometry('350x600')
@@ -37,37 +37,59 @@ def Home() :
         rb1.forget()
         rb2.forget()
         submit.forget()
-        Label(HomeFrame,text=ans.get(),fg='black',bg=bac,font=('San Sarif',15)).pack(pady=5,anchor=SW)
+        # Label(HomeFrame,text=ans.get(),fg='black',bg=bac,font=('San Sarif',15)).pack(pady=5,anchor=SW)
         song = mod1.__init__(mood)
         # print(song)
         # songslist
         songlist = song[0]
         # number of songs to show 
-        numberOfSongs = song[1]
+        numberOfSongs = 2*song[1]
         # print(songlist)
         # print(numberOfSongs)
+        listboxFrame = Frame(root,width=350,height=600,bg=bac)
+        listboxFrame.pack(padx=10,pady=10,fill=None,expand=False)
         x=0
+        listbox = Listbox(listboxFrame,height=45,width=35,bg='white',font=('Helvetica',12,'italic'),fg='black')
+        listbox.pack(pady=10,fill='both',expand=True)
+        
+        # scrollbar in listbox
+        vsb = Scrollbar(listboxFrame, orient="vertical", command=listbox.yview)
+        listbox.configure(yscrollcommand=vsb)
+        vsb.pack(side="right", fill="y")
+        """x = 0
         for i in songlist :
-            if  x < numberOfSongs :
-                Label(HomeFrame,text=(i+' : '+songlist[i]),fg='black',bg=bac,font=('San Sarif',15)).pack(pady=5,expand=FALSE)
-                # print(i,' : ',songlist[i])
+            if x < numberOfSongs :
+                listbox.insert(x,i+' : '+songlist[i])
+                # Label(HomeFrame,text=(i+' : '+songlist[i]),fg='black',bg=bac,font=('San Sarif',15)).pack(pady=5,expand=FALSE)
+            # print(i,' : ',songlist[i])
+            else :
+                break
+            x+=1"""
+        for i in songlist : 
+            if x < numberOfSongs :
+            # listbox.insert(x,i+' : '+songlist[i])
+                listbox.insert(x,"      "+i)
+                x+=1
+                listbox.insert(x,'')
             else :
                 break
             x+=1
+            # Label(HomeFrame,text=(i+' : '+songlist[i]),fg='black',bg=bac,font=('San Sarif',15)).pack(pady=5,expand=FALSE)
+            # print(i,' : ',songlist[i])
     
     # find a question 
     ques = file.getQuestion()
     # Name of the UI 
-    Label(HomeFrame,text="Music Recommender system",bg=bac,fg='black',font=('San Sarif',18,'bold','italic')).pack(padx=10,pady=25,anchor=CENTER)
-    Label(HomeFrame,text=ques[0],bg=bac,fg='black',font=('San Sarif',15,'bold')).pack(padx=10,pady=40,anchor=CENTER,expand=FALSE)
+    Label(HomeFrame,text="Music Recommender system",bg=bac,fg='black',font=('San Sarif',16,'bold')).pack(padx=10,pady=25,anchor=CENTER)
+    Label(HomeFrame,text=ques[0],bg=bac,fg='black',font=('Helvetica',14)).pack(padx=10,pady=10,expand=FALSE)
     # variable 
     ans = IntVar()
     # Radiobutton
-    rb1 =Radiobutton(HomeFrame,text='Yes',bg=bac,fg='black',font=('San Sarif',10),variable=ans,value=1)
+    rb1 =Radiobutton(HomeFrame,text='Yes',bg=bac,fg='black',font=('San Sarif',13,'bold'),variable=ans,value=1)
     rb1.pack(padx=10,pady=5,anchor=SW,expand=FALSE)
-    rb2= Radiobutton(HomeFrame,text='No',bg=bac,fg='black',font=('San Sarif',10),variable=ans,value=2)
+    rb2= Radiobutton(HomeFrame,text='No',bg=bac,fg='black',font=('San Sarif',13,'bold'),variable=ans,value=2)
     rb2.pack(padx=10,pady=5,anchor=SW,expand=FALSE)
-    submit = Button(HomeFrame,text="Submit",font=('San Sarif',15),fg='white',bg='dark blue',command=getEntry)
+    submit = Button(HomeFrame,text="Submit",font=('San Sarif',13),fg='white',bg='dark blue',command=getEntry)
     submit.pack(pady=30)
 
 Home()
