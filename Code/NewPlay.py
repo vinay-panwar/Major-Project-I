@@ -2,6 +2,7 @@ from dataclasses import InitVar
 from inspect import Attribute
 from msilib.schema import ListBox, RadioButton
 from multiprocessing import Value
+from os import link
 from pydoc import text
 from time import sleep
 from tkinter import *
@@ -14,7 +15,7 @@ import NewMain as mod1
 bac = 'Light gray'
 
 root = Tk()
-root.geometry('350x600')
+root.geometry('350x650')
 # root.resizable(0,0)
 # root.maxsize(350,600)
 root.configure(background=bac)
@@ -46,29 +47,31 @@ def Home() :
         numberOfSongs = 2*song[1]
         # print(songlist)
         # print(numberOfSongs)
-        listboxFrame = Frame(root,width=350,height=600,bg=bac)
+        # frame to store the list of songs in UI.
+        listboxFrame = Frame(root,width=300,height=600,bg=bac)
         listboxFrame.pack(padx=10,pady=10,fill=None,expand=False)
-        x=0
-        listbox = Listbox(listboxFrame,height=45,width=35,bg='white',font=('Helvetica',12,'italic'),fg='black')
+        
+        # creating the list box which will be stored in the listboxFrame.
+        listbox = Listbox(listboxFrame,height=40,width=35,bg=bac,font=('Helvetica',12,'italic'),fg='black')
         listbox.pack(pady=10,fill='both',expand=True)
         
         # scrollbar in listbox
         vsb = Scrollbar(listboxFrame, orient="vertical", command=listbox.yview)
         listbox.configure(yscrollcommand=vsb)
         vsb.pack(side="right", fill="y")
-        """x = 0
-        for i in songlist :
-            if x < numberOfSongs :
-                listbox.insert(x,i+' : '+songlist[i])
-                # Label(HomeFrame,text=(i+' : '+songlist[i]),fg='black',bg=bac,font=('San Sarif',15)).pack(pady=5,expand=FALSE)
-            # print(i,' : ',songlist[i])
-            else :
-                break
-            x+=1"""
+        
+        # adding a logo of music at the time of starting of insert.
+        # D:\Projects\Major Project I\Code\ICON\music.png
+        """addMusicBackground = PhotoImage(file='D:\Projects\Major Project I\Code\ICON\music.png')
+        imagenew = Label(HomeFrame, image=addMusicBackground,background=bac,fg='white')
+        imagenew.pack(pady=20)"""
+        # inserting value in the listbox on UI.
+        # to limit the song to a given number of time.
+        x=0
         for i in songlist : 
-            if x < numberOfSongs :
-            # listbox.insert(x,i+' : '+songlist[i])
-                listbox.insert(x,"      "+i)
+            if x <= numberOfSongs :
+                # listbox.insert(x,i+' : '+songlist[i])
+                listbox.insert(x,("    "+i+" : "+songlist[i]))
                 x+=1
                 listbox.insert(x,'')
             else :
@@ -76,7 +79,8 @@ def Home() :
             x+=1
             # Label(HomeFrame,text=(i+' : '+songlist[i]),fg='black',bg=bac,font=('San Sarif',15)).pack(pady=5,expand=FALSE)
             # print(i,' : ',songlist[i])
-    
+        # listbox.forget()
+        return 0
     # find a question 
     ques = file.getQuestion()
     # Name of the UI 
@@ -84,18 +88,20 @@ def Home() :
     Label(HomeFrame,text=ques[0],bg=bac,fg='black',font=('Helvetica',14)).pack(padx=10,pady=10,expand=FALSE)
     # variable 
     ans = IntVar()
-    # Radiobutton
+    # Radiobutton to select yes or no for an answer
     rb1 =Radiobutton(HomeFrame,text='Yes',bg=bac,fg='black',font=('San Sarif',13,'bold'),variable=ans,value=1)
     rb1.pack(padx=10,pady=5,anchor=SW,expand=FALSE)
     rb2= Radiobutton(HomeFrame,text='No',bg=bac,fg='black',font=('San Sarif',13,'bold'),variable=ans,value=2)
     rb2.pack(padx=10,pady=5,anchor=SW,expand=FALSE)
+    
+    # submit button to send the details to another function.
     submit = Button(HomeFrame,text="Submit",font=('San Sarif',13),fg='white',bg='dark blue',command=getEntry)
     submit.pack(pady=30)
-
+# Home window call 
 Home()
 # next window 
-label_image = Label(root,bg=bac)
-label_image.pack()
+nextWindow = Label(root,bg=bac)
+nextWindow.pack()
 
 # media player initialized 
 player = py.media.Player()
@@ -111,18 +117,18 @@ def load(song) :
 
 # default code 
 def default() :
-    backButton = Button(label_image,image=backwardBackground,command= pause,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    backButton = Button(nextWindow,image=backwardBackground,command= pause,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
     # pause_button.pack(padx= 10,pady= 30, anchor=CENTER)
     backButton.grid(row=buttonRaw,column=0,padx=buttonPadX,pady=buttonPadY)
 
 
-    playButton = Button(label_image,image=playBackground, command= play,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    playButton = Button(nextWindow,image=playBackground, command= play,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
     # playButton.pack(pady=30,anchor=E)
     playButton.grid(row=buttonRaw,column=3,padx=buttonPadX,pady=buttonPadY)
     
-    pauseButton= Button(label_image,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    pauseButton= Button(nextWindow,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
 
-    forwardButton = Button(label_image,image=forwardBackground,command= next_,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    forwardButton = Button(nextWindow,image=forwardBackground,command= next_,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
     # forwardButton.pack(padx= 10,pady= 30, anchor=W)
     forwardButton.grid(row=buttonRaw,column=6,padx=buttonPadX,pady=buttonPadY)
 
@@ -131,7 +137,7 @@ def song(num) :
     song = ["D://Projects//Major Project I//Dataset//Song//kesariya.mp3","D://Projects//Major Project I//Dataset//Song//Mast Magan.mp3"]
     songName = song[num].split(sep="//")
     songName= songName[len(songName)-1].split(".")
-    Label(label_image,text=songName[0],bg=bac,fg='black',font=('San Sarif',15)).grid(row=3,column=3, pady=20) 
+    Label(nextWindow,text=songName[0],bg=bac,fg='black',font=('San Sarif',15)).grid(row=3,column=3, pady=20) 
     return song[num]
 
 
@@ -141,22 +147,22 @@ def play() :
     playButton.forget()
     player.play()
     # pauseButton.pack(pady=30,anchor=E)
-    pauseButton= Button(label_image,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    pauseButton= Button(nextWindow,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
     pauseButton.grid(row=buttonRaw,column=3,padx=buttonPadX,pady=buttonPadY)
 
     
-    backButton = Button(label_image,image=backwardBackground,command= revert,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    backButton = Button(nextWindow,image=backwardBackground,command= revert,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
     # pause_button.pack(padx= 10,pady= 30, anchor=CENTER)
     backButton.grid(row=buttonRaw,column=0,padx=buttonPadX,pady=buttonPadY)
     
-    forwardButton = Button(label_image,image=forwardBackground,command= next_,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    forwardButton = Button(nextWindow,image=forwardBackground,command= next_,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
     # forwardButton.pack(padx= 10,pady= 30, anchor=W)
     forwardButton.grid(row=buttonRaw,column=6,padx=buttonPadX,pady=buttonPadY)
 
 def pause() :
     player.pause()
     pauseButton.forget()
-    LabelImage()
+    secondWindow()
 
 
 
@@ -174,8 +180,8 @@ def revert() :
     default()
     load(song(0))
 
-
-def LabelImage() :
+# UI to play music and song which are stored on the source device.
+def secondWindow() :
     
     """# Name of the UI 
     Label(root,text="Music Recommender system",bg=bac,fg='black',font=('verdana',15,'bold')).pack(padx=10,pady=40,anchor=CENTER)    """
@@ -198,18 +204,18 @@ def LabelImage() :
     forwardBackground = PhotoImage(file='D:\Projects\Major Project I\Code\ICON\\forward.png')
     backwardBackground = PhotoImage(file='D:\Projects\Major Project I\Code\ICON\\backward.png')
     
-    backButton = Button(label_image,image=backwardBackground,command= revert,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    backButton = Button(nextWindow,image=backwardBackground,command= revert,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
     # pause_button.pack(padx= 10,pady= 30, anchor=CENTER)
     backButton.grid(row=buttonRaw,column=0,padx=buttonPadX,pady=buttonPadY)
 
 
-    playButton = Button(label_image,image=playBackground, command= play,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    playButton = Button(nextWindow,image=playBackground, command= play,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
     # playButton.pack(pady=30,anchor=E)
     playButton.grid(row=buttonRaw,column=3,padx=buttonPadX,pady=buttonPadY)
     
-    pauseButton= Button(label_image,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    pauseButton= Button(nextWindow,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
 
-    forwardButton = Button(label_image,image=forwardBackground,command= next_,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    forwardButton = Button(nextWindow,image=forwardBackground,command= next_,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
     # forwardButton.pack(padx= 10,pady= 30, anchor=W)
     forwardButton.grid(row=buttonRaw,column=6,padx=buttonPadX,pady=buttonPadY)
     # default()
@@ -218,5 +224,5 @@ def LabelImage() :
     # extraButton.pack(padx=10,pady=30, anchor=CENTER)
         
 
-# LabelImage()
+# secondWindow()
 root.mainloop()
