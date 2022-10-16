@@ -1,17 +1,9 @@
-from importlib.resources import path
-from inspect import Attribute
-from operator import ne
-from os import sep
-from signal import default_int_handler
-from sqlite3 import PARSE_DECLTYPES
-from struct import pack
-from tkinter import *
-from turtle import bgcolor, color, forward, shape 
+from tkinter import * 
 import pyglet as py
 
 
 # whole ui background
-bac = 'light gray'
+bac = 'white'
 
 root = Tk()
 root.geometry('350x600')
@@ -49,11 +41,11 @@ def default() :
     backButton.grid(row=buttonRaw,column=0,padx=buttonPadX,pady=buttonPadY)
 
 
-    playButton = Button(label_image,image=playBackground, command= play,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    playButton = Button(label_image,image=playBackground, command= play,bg=bac,borderwidth= 0.1,width= 50,fg= 'white')
     # playButton.pack(pady=30,anchor=E)
     playButton.grid(row=buttonRaw,column=3,padx=buttonPadX,pady=buttonPadY)
     
-    pauseButton= Button(label_image,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    pauseButton= Button(label_image,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 50,fg= 'white')
 
     forwardButton = Button(label_image,image=forwardBackground,command= next_,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
     # forwardButton.pack(padx= 10,pady= 30, anchor=W)
@@ -74,7 +66,7 @@ def play() :
     playButton.forget()
     player.play()
     # pauseButton.pack(pady=30,anchor=E)
-    pauseButton= Button(label_image,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    # pauseButton= Button(label_image,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 50,fg= 'white')
     pauseButton.grid(row=buttonRaw,column=3,padx=buttonPadX,pady=buttonPadY)
 
     
@@ -136,11 +128,11 @@ def main() :
     backButton.grid(row=buttonRaw,column=0,padx=buttonPadX,pady=buttonPadY)
 
 
-    playButton = Button(label_image,image=playBackground, command= play,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    playButton = Button(label_image,image=playBackground, command= play,bg=bac,borderwidth= 0.1,width= 50,fg= 'white')
     # playButton.pack(pady=30,anchor=E)
     playButton.grid(row=buttonRaw,column=3,padx=buttonPadX,pady=buttonPadY)
     
-    pauseButton= Button(label_image,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    pauseButton= Button(label_image,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 50,fg= 'white')
 
     forwardButton = Button(label_image,image=forwardBackground,command= next_,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
     # forwardButton.pack(padx= 10,pady= 30, anchor=W)

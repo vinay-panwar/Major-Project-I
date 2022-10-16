@@ -1,10 +1,4 @@
-from dataclasses import InitVar
-from inspect import Attribute
-from msilib.schema import ListBox, RadioButton
-from multiprocessing import Value
-from os import link
-from pydoc import text
-from time import sleep
+# Tkinter module for GUI Control and show
 from tkinter import *
 import pyglet as py
 # import NewOpenFile as file
@@ -12,7 +6,7 @@ import fileOpen as file
 import NewMain as mod1
 
 # whole ui background
-bac = 'Light gray'
+bac = 'white'
 
 root = Tk()
 root.geometry('350x650')
@@ -21,7 +15,7 @@ root.geometry('350x650')
 root.configure(background=bac)
 root.title('music recommender UI')
 root.iconbitmap(r'D:\Projects\Major Project I\Code\ICON\apple-music.ico')
-root.attributes('-alpha',0.8)
+# root.attributes('-alpha',0.8)
 
 # root.wm_attributes("-topmost", True)
 # root.wm_attributes("-disabled", True)
@@ -31,6 +25,8 @@ HomeFrame.pack(fill=BOTH,expand=False)
 
 def Home() :
     # after click on sumit button get the entered value 
+    # text color 
+    textColor = 'navy'
     def getEntry() :
         print(ans.get())
         mood = file.getMood(ques[1],ans.get())
@@ -52,7 +48,7 @@ def Home() :
         listboxFrame.pack(padx=10,pady=10,fill=None,expand=False)
         
         # creating the list box which will be stored in the listboxFrame.
-        listbox = Listbox(listboxFrame,height=40,width=35,bg=bac,font=('Helvetica',12,'italic'),fg='black')
+        listbox = Listbox(listboxFrame,height=40,width=35,bg=bac,font=('Helvetica',12,'italic'),fg=textColor,borderwidth=0,highlightthickness=0)
         listbox.pack(pady=10,fill='both',expand=True)
         
         # scrollbar in listbox
@@ -71,7 +67,7 @@ def Home() :
         for i in songlist : 
             if x <= numberOfSongs :
                 # listbox.insert(x,i+' : '+songlist[i])
-                listbox.insert(x,("    "+i+" : "+songlist[i]))
+                listbox.insert(x,("    "+i+" Link : "+songlist[i]))
                 x+=1
                 listbox.insert(x,'')
             else :
@@ -84,14 +80,14 @@ def Home() :
     # find a question 
     ques = file.getQuestion()
     # Name of the UI 
-    Label(HomeFrame,text="Music Recommender system",bg=bac,fg='black',font=('San Sarif',16,'bold')).pack(padx=10,pady=25,anchor=CENTER)
-    Label(HomeFrame,text=ques[0],bg=bac,fg='black',font=('Helvetica',14)).pack(padx=10,pady=10,expand=FALSE)
+    Label(HomeFrame,text="Music Recommender system",bg=bac,fg='Dark red',font=('San Sarif',16,'bold')).pack(padx=10,pady=25,anchor=CENTER)
+    Label(HomeFrame,text=ques[0],bg=bac,fg='pink',font=('Helvetica',14)).pack(padx=10,pady=10,expand=FALSE)
     # variable 
     ans = IntVar()
     # Radiobutton to select yes or no for an answer
-    rb1 =Radiobutton(HomeFrame,text='Yes',bg=bac,fg='black',font=('San Sarif',13,'bold'),variable=ans,value=1)
+    rb1 =Radiobutton(HomeFrame,text='Yes',bg=bac,fg=textColor,font=('San Sarif',13,'bold'),variable=ans,value=1)
     rb1.pack(padx=10,pady=5,anchor=SW,expand=FALSE)
-    rb2= Radiobutton(HomeFrame,text='No',bg=bac,fg='black',font=('San Sarif',13,'bold'),variable=ans,value=2)
+    rb2= Radiobutton(HomeFrame,text='No',bg=bac,fg=textColor,font=('San Sarif',13,'bold'),variable=ans,value=2)
     rb2.pack(padx=10,pady=5,anchor=SW,expand=FALSE)
     
     # submit button to send the details to another function.
