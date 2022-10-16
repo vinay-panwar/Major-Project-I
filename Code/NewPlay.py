@@ -8,7 +8,7 @@ import fileOpen as file
 import NewMain as mod1
 
 # whole ui background
-bac = 'antique white'
+bac = 'white'
 
 root = Tk()
 root.geometry('350x650')
@@ -82,6 +82,7 @@ def Home() :
             # Label(HomeFrame,text=(i+' : '+songlist[i]),fg='black',bg=bac,font=('San Sarif',15)).pack(pady=5,expand=FALSE)
             # print(i,' : ',songlist[i])
         # listbox.forget()
+        # secondWindow()
         return 0
     """# scrollbar in root 
     vsb = Scrollbar(root, orient="vertical")
@@ -94,7 +95,7 @@ def Home() :
     # Name of the UI 
     Label(HomeFrame,text="Music Recommender system",bg=bac,fg='Dark red',font=('San Sarif',16,'bold')).pack(padx=10,pady=25,anchor=CENTER)
     # Label(HomeFrame,text=ques[0],bg=bac,fg=textColor,font=('Helvetica',14)).pack(padx=10,pady=10,expand=FALSE)
-    Label(HomeFrame,text='Feedback',font=('Helvetica',14),bg=bac).pack()
+    Label(HomeFrame,text='Feedback',font=('Helvetica',14),bg=bac,fg=textColor).pack()
     question = Text(HomeFrame,fg=textColor,bg=bac,width=35,height=len(ques[0])/25,font=('Helvetica',14),borderwidth=0,highlightthickness=0)
     # question.configure(state=disable)
     question.pack(padx=10,pady=10)
@@ -135,11 +136,11 @@ def default() :
     backButton.grid(row=buttonRaw,column=0,padx=buttonPadX,pady=buttonPadY)
 
 
-    playButton = Button(nextWindow,image=playBackground, command= play,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    playButton = Button(nextWindow,image=playBackground, command= play,bg=bac,borderwidth= 0.1,width= 50,fg= 'white')
     # playButton.pack(pady=30,anchor=E)
     playButton.grid(row=buttonRaw,column=3,padx=buttonPadX,pady=buttonPadY)
     
-    pauseButton= Button(nextWindow,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    pauseButton= Button(nextWindow,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 50,fg= 'white')
 
     forwardButton = Button(nextWindow,image=forwardBackground,command= next_,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
     # forwardButton.pack(padx= 10,pady= 30, anchor=W)
@@ -160,7 +161,7 @@ def play() :
     playButton.forget()
     player.play()
     # pauseButton.pack(pady=30,anchor=E)
-    pauseButton= Button(nextWindow,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    pauseButton= Button(nextWindow,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 50,fg= 'white')
     pauseButton.grid(row=buttonRaw,column=3,padx=buttonPadX,pady=buttonPadY)
 
     
@@ -222,11 +223,11 @@ def secondWindow() :
     backButton.grid(row=buttonRaw,column=0,padx=buttonPadX,pady=buttonPadY)
 
 
-    playButton = Button(nextWindow,image=playBackground, command= play,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    playButton = Button(nextWindow,image=playBackground, command= play,bg=bac,borderwidth= 0.1,width= 50,fg= 'white')
     # playButton.pack(pady=30,anchor=E)
     playButton.grid(row=buttonRaw,column=3,padx=buttonPadX,pady=buttonPadY)
     
-    pauseButton= Button(nextWindow,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
+    pauseButton= Button(nextWindow,image=pauseBackground, command= pause,bg=bac,borderwidth= 0.1,width= 50,fg= 'white')
 
     forwardButton = Button(nextWindow,image=forwardBackground,command= next_,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
     # forwardButton.pack(padx= 10,pady= 30, anchor=W)

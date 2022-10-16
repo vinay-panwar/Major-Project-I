@@ -16,7 +16,7 @@ root.attributes('-alpha',0.8)
 # root.wm_attributes("-transparentcolor", bac)
 
 # Name of the UI 
-Label(root,text="Music Recommender system",bg=bac,fg='black',font=('San Sarif',15,'bold')).pack(padx=10,pady=40,anchor=CENTER)
+Label(root,text="Music Recommender system",bg=bac,fg='Dark red',font=('San Sarif',15,'bold')).pack(padx=10,pady=50,anchor=CENTER)
 
 # next window 
 label_image = Label(root,bg=bac)
@@ -56,7 +56,7 @@ def song(num) :
     song = ["D://Projects//Major Project I//Dataset//Song//kesariya.mp3","D://Projects//Major Project I//Dataset//Song//Mast Magan.mp3"]
     songName = song[num].split(sep="//")
     songName= songName[len(songName)-1].split(".")
-    Label(label_image,text=songName[0],bg=bac,fg='black',font=('San Sarif',15)).grid(row=3,column=3, pady=20) 
+    Label(label_image,text=songName[0],bg=bac,fg='black',font=('San Sarif',15)).grid(row=3,column=3, pady=50) 
     return song[num]
 
 
@@ -102,8 +102,8 @@ def revert() :
 
 def main() :
     
-    """# Name of the UI 
-    Label(root,text="Music Recommender system",bg=bac,fg='black',font=('verdana',15,'bold')).pack(padx=10,pady=40,anchor=CENTER)    """
+    # Name of the UI 
+    # Label(root,text="Music Recommender system",bg=bac,fg='black',font=('verdana',15,'bold')).pack(padx=10,pady=40,anchor=CENTER) 
     # scope
     global pauseButton, playButton,forwardButton, playBackground,pauseBackground,forwardBackground,backwardBackground,backButton
     global buttonPadX, buttonPadY,buttonRaw 
