@@ -1,4 +1,6 @@
 # Tkinter module for GUI Control and show
+from ctypes import sizeof
+from faulthandler import disable
 from tkinter import *
 import pyglet as py
 # import NewOpenFile as file
@@ -6,16 +8,20 @@ import fileOpen as file
 import NewMain as mod1
 
 # whole ui background
-bac = 'white'
+bac = 'antique white'
 
 root = Tk()
 root.geometry('350x650')
-# root.resizable(0,0)
+root.resizable(0,0)
 # root.maxsize(350,600)
 root.configure(background=bac)
 root.title('music recommender UI')
 root.iconbitmap(r'D:\Projects\Major Project I\Code\ICON\apple-music.ico')
 # root.attributes('-alpha',0.8)
+
+# scrollbar in root
+homeScrollar = Scrollbar(root,orient="vertical")
+homeScrollar.pack(side="right", fill="y")
 
 # root.wm_attributes("-topmost", True)
 # root.wm_attributes("-disabled", True)
@@ -23,10 +29,11 @@ root.iconbitmap(r'D:\Projects\Major Project I\Code\ICON\apple-music.ico')
 HomeFrame = Frame(root,width=350,height=600,bg=bac)
 HomeFrame.pack(fill=BOTH,expand=False)
 
+
 def Home() :
     # after click on sumit button get the entered value 
     # text color 
-    textColor = 'navy'
+    textColor = 'hot pink'
     def getEntry() :
         print(ans.get())
         mood = file.getMood(ques[1],ans.get())
@@ -53,7 +60,6 @@ def Home() :
         
         # scrollbar in listbox
         vsb = Scrollbar(listboxFrame, orient="vertical", command=listbox.yview)
-        listbox.configure(yscrollcommand=vsb)
         vsb.pack(side="right", fill="y")
         
         # adding a logo of music at the time of starting of insert.
@@ -77,11 +83,22 @@ def Home() :
             # print(i,' : ',songlist[i])
         # listbox.forget()
         return 0
+    """# scrollbar in root 
+    vsb = Scrollbar(root, orient="vertical")
+    root.configure(yscrollcommand=vsb)
+    vsb.pack(side="right", fill="y")"""
+
+   
     # find a question 
     ques = file.getQuestion()
     # Name of the UI 
     Label(HomeFrame,text="Music Recommender system",bg=bac,fg='Dark red',font=('San Sarif',16,'bold')).pack(padx=10,pady=25,anchor=CENTER)
-    Label(HomeFrame,text=ques[0],bg=bac,fg='pink',font=('Helvetica',14)).pack(padx=10,pady=10,expand=FALSE)
+    # Label(HomeFrame,text=ques[0],bg=bac,fg=textColor,font=('Helvetica',14)).pack(padx=10,pady=10,expand=FALSE)
+    Label(HomeFrame,text='Feedback',font=('Helvetica',14),bg=bac).pack()
+    question = Text(HomeFrame,fg=textColor,bg=bac,width=35,height=len(ques[0])/25,font=('Helvetica',14),borderwidth=0,highlightthickness=0)
+    # question.configure(state=disable)
+    question.pack(padx=10,pady=10)
+    question.insert(END,ques[0]) 
     # variable 
     ans = IntVar()
     # Radiobutton to select yes or no for an answer
@@ -92,7 +109,7 @@ def Home() :
     
     # submit button to send the details to another function.
     submit = Button(HomeFrame,text="Submit",font=('San Sarif',13),fg='white',bg='dark blue',command=getEntry)
-    submit.pack(pady=30)
+    submit.pack(pady=20)
 # Home window call 
 Home()
 # next window 
