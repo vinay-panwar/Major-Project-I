@@ -33,7 +33,8 @@ HomeFrame.pack(fill=BOTH,expand=False)
 def Home() :
     # after click on sumit button get the entered value 
     # text color 
-    textColor = 'hot pink'
+    # textColor = 'hot pink'
+    textColor = 'darkSalmon'
     def getEntry() :
         print(ans.get())
         mood = file.getMood(ques[1],ans.get())
@@ -42,6 +43,12 @@ def Home() :
         rb2.forget()
         submit.forget()
         # Label(HomeFrame,text=ans.get(),fg='black',bg=bac,font=('San Sarif',15)).pack(pady=5,anchor=SW)
+        ansLabel = ''
+        if ans.get() ==0 : 
+            ansLabel = 'No'
+        else : 
+            ansLabel= 'Yes'
+        Label(HomeFrame,text=ansLabel,fg=textColor,bg=bac,font=('San Sarif',12,'bold')).pack(pady=5,anchor=SW)
         song = mod1.__init__(mood)
         # print(song)
         # songslist
@@ -95,7 +102,7 @@ def Home() :
     # Name of the UI 
     Label(HomeFrame,text="Music Recommender system",bg=bac,fg='Dark red',font=('San Sarif',16,'bold')).pack(padx=10,pady=25,anchor=CENTER)
     # Label(HomeFrame,text=ques[0],bg=bac,fg=textColor,font=('Helvetica',14)).pack(padx=10,pady=10,expand=FALSE)
-    Label(HomeFrame,text='Feedback',font=('Helvetica',14),bg=bac,fg=textColor).pack()
+    Label(HomeFrame,text='Feedback',font=('Helvetica',18),bg=bac,fg=textColor).pack()
     question = Text(HomeFrame,fg=textColor,bg=bac,width=35,height=len(ques[0])/25,font=('Helvetica',14),borderwidth=0,highlightthickness=0)
     # question.configure(state=disable)
     question.pack(padx=10,pady=10)

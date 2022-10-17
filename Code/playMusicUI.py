@@ -16,7 +16,7 @@ root.attributes('-alpha',0.8)
 # root.wm_attributes("-transparentcolor", bac)
 
 # Name of the UI 
-Label(root,text="Music Recommender system",bg=bac,fg='Dark red',font=('San Sarif',15,'bold')).pack(padx=10,pady=50,anchor=CENTER)
+Label(root,text="Music Recommender system",bg=bac,fg='Dark red',font=('San Sarif',15,'bold')).pack(padx=10,pady=10,anchor=CENTER)
 
 # next window 
 label_image = Label(root,bg=bac)

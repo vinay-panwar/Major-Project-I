@@ -45,7 +45,7 @@ def show_songs(albums) :
 def show_album(albums) :
     song_list = {}
     num_song = 0
-    # number of songs to show 
+    # number of songs to show, which you got to do decide
     if albums['total'] > 10 :
         num_song = 10
     else :
@@ -149,12 +149,6 @@ def __init__(get) :
     songs = find_song(sp,get)
     # ask_song = 'Happy'
     # find_song(sp,ask_song)
-    # songslist
-    songlist = songs[0]
-    # number of songs to show 
-    numberOfSongs = songs[1]
-    # print(songlist)
-    # print(numberOfSongs)
     """x=0
     for i in songlist :
         if  x < numberOfSongs :
