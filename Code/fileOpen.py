@@ -13,7 +13,7 @@ with open('D:\\Projects\\Major Project I\\Dataset\\train.txt.','r') as f:
 # find the question at random index
 def getQuestion() :         
     ques = random.randint(0,len(data)-1)
-    print(data[ques][0])
+    # print(data[ques][0])
     return [data[ques][0],ques]
     
 # define the mood using that question's answer
