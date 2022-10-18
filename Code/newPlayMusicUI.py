@@ -1,7 +1,6 @@
 # Tkinter module for GUI Control and show
-from ctypes import sizeof
-from faulthandler import disable
 from tkinter import *
+from tkinter import font
 import pyglet as py
 # import NewOpenFile as file
 import fileOpen as file
@@ -29,26 +28,41 @@ homeScrollar.pack(side="right", fill="y")
 HomeFrame = Frame(root,width=350,height=600,bg=bac)
 HomeFrame.pack(fill=BOTH,expand=False)
 
+# font family to change 
+fontFamily = 'Work Sans'
+
+# text color 
+# textColor = 'hot pink'
+textColor = 'hot pink'
 
 def Home() :
+    def remove() :
+        questionHeadline.forget()
+        question.forget()
+        rb1.forget()
+        rb2.forget()
+        submit.forget()
     # after click on sumit button get the entered value 
-    # text color 
-    # textColor = 'hot pink'
-    textColor = 'darkSalmon'
+
     def getEntry() :
         print(ans.get())
         mood = file.getMood(ques[1],ans.get())
         print(mood)
+        remove()
+        """questionHeadline.forget()
+        question.forget()
         rb1.forget()
         rb2.forget()
-        submit.forget()
+        submit.forget()"""
         # Label(HomeFrame,text=ans.get(),fg='black',bg=bac,font=('San Sarif',15)).pack(pady=5,anchor=SW)
-        ansLabel = ''
-        if ans.get() ==0 : 
+        ansHeadline = Label(HomeFrame,text='Suggested Songs',font=(fontFamily,18),bg=bac,fg=textColor)
+        ansHeadline.pack()
+        """if ans.get() ==0 : 
             ansLabel = 'No'
         else : 
-            ansLabel= 'Yes'
-        Label(HomeFrame,text=ansLabel,fg=textColor,bg=bac,font=('San Sarif',12,'bold')).pack(pady=5,anchor=SW)
+            ansLabel= 'Yes'"""
+        # Label(HomeFrame,text=ansLabel,fg=textColor,bg=bac,font=('San Sarif',12,'bold')).pack(pady=5,anchor=SW)
+        # question.insert(END,ansLabel)
         song = mod1.__init__(mood)
         # print(song)
         # songslist
@@ -62,7 +76,7 @@ def Home() :
         listboxFrame.pack(padx=10,pady=10,fill=None,expand=False)
         
         # creating the list box which will be stored in the listboxFrame.
-        listbox = Listbox(listboxFrame,height=40,width=35,bg=bac,font=('Helvetica',12,'italic'),fg=textColor,borderwidth=0,highlightthickness=0)
+        listbox = Listbox(listboxFrame,height=40,width=35,bg=bac,font=(fontFamily,12,'italic'),fg=textColor,borderwidth=0,highlightthickness=0)
         listbox.pack(pady=10,fill='both',expand=True)
         
         # scrollbar in listbox
@@ -75,6 +89,8 @@ def Home() :
         imagenew = Label(HomeFrame, image=addMusicBackground,background=bac,fg='white')
         imagenew.pack(pady=20)"""
         # inserting value in the listbox on UI.
+        # playBackground = PhotoImage(file='D:\Projects\Major Project I\Code\ICON\play.png')
+        
         # to limit the song to a given number of time.
         x=0
         for i in songlist : 
@@ -100,23 +116,25 @@ def Home() :
     # find a question 
     ques = file.getQuestion()
     # Name of the UI 
-    Label(HomeFrame,text="Music Recommender system",bg=bac,fg='Dark red',font=('San Sarif',16,'bold')).pack(padx=10,pady=25,anchor=CENTER)
+    Label(HomeFrame,text="Music Recommender system",bg=bac,fg='Dark red',font=('San Sarif',8,'bold')).pack(padx=10,pady=25,anchor=SW)
     # Label(HomeFrame,text=ques[0],bg=bac,fg=textColor,font=('Helvetica',14)).pack(padx=10,pady=10,expand=FALSE)
-    Label(HomeFrame,text='Feedback',font=('Times new roman',18),bg=bac,fg=textColor).pack()
-    question = Text(HomeFrame,fg=textColor,bg=bac,width=35,height=len(ques[0])/25,font=('Helvetica',14),borderwidth=0,highlightthickness=0)
+    questionHeadline = Label(HomeFrame,text='Question',font=(fontFamily,18),bg=bac,fg=textColor)
+    questionHeadline.pack()
+    question = Text(HomeFrame,fg=textColor,bg=bac,width=35,height=len(ques[0])/25,font=(fontFamily,14),borderwidth=0,highlightthickness=0)
     # question.configure(state=disable)
-    question.pack(padx=10,pady=10)
-    question.insert(END,ques[0]) 
+    question.pack(padx=10,pady=10,expand=True)
+    question.insert(END,ques[0])
+    question.insert(END, "\n\n") 
     # variable 
     ans = IntVar()
     # Radiobutton to select yes or no for an answer
-    rb1 =Radiobutton(HomeFrame,text='Yes',bg=bac,fg=textColor,font=('San Sarif',13,'bold'),variable=ans,value=1)
+    rb1 =Radiobutton(HomeFrame,text='Yes',bg=bac,fg=textColor,font=(fontFamily,12),variable=ans,value=1)
     rb1.pack(padx=10,pady=5,anchor=SW,expand=FALSE)
-    rb2= Radiobutton(HomeFrame,text='No',bg=bac,fg=textColor,font=('San Sarif',13,'bold'),variable=ans,value=2)
+    rb2= Radiobutton(HomeFrame,text='No',bg=bac,fg=textColor,font=(fontFamily,12),variable=ans,value=2)
     rb2.pack(padx=10,pady=5,anchor=SW,expand=FALSE)
     
     # submit button to send the details to another function.
-    submit = Button(HomeFrame,text="Submit",font=('San Sarif',13),fg='white',bg='dark blue',command=getEntry)
+    submit = Button(HomeFrame,text="Submit",font=(fontFamily,13),fg='white',bg='dark blue',command=getEntry)
     submit.pack(pady=20)
 # Home window call 
 Home()

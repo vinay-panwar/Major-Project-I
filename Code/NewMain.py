@@ -6,13 +6,15 @@ import random as r
 # import fileOpen as file
 # import NewOpenFile as file
 
+# Maximum number of song to show
+maxSongs = 10
 # list out all the songs could be played
 def show_songs(albums) :
     song_list = {}
     num_song = 0
     # number of songs to show 
-    if albums['total'] > 10 :
-        num_song = 10
+    if albums['total'] > maxSongs :
+        num_song = maxSongs
     else :
         num_song =albums['total']
     try :
@@ -46,8 +48,8 @@ def show_album(albums) :
     song_list = {}
     num_song = 0
     # number of songs to show, which you got to do decide
-    if albums['total'] > 10 :
-        num_song = 10
+    if albums['total'] > maxSongs :
+        num_song = maxSongs
     else :
         num_song =albums['total']
         
