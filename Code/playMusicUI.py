@@ -122,11 +122,11 @@ def main() :
     pauseBackground = PhotoImage(file='D:\Projects\Major Project I\Code\ICON\pause.png')
     forwardBackground = PhotoImage(file='D:\Projects\Major Project I\Code\ICON\\forward.png')
     backwardBackground = PhotoImage(file='D:\Projects\Major Project I\Code\ICON\\backward.png')
-    centerImage =PhotoImage(file="D:\Projects\Major Project I\Code\ICON\musicBack.png")
+    # centerImage =PhotoImage(file="D:\Projects\Major Project I\Code\ICON\musicBack.png")
     
     # Center image pic
-    centerPic=Label(label_image,image=centerImage,bg=bac,borderwidth=0,highlightthickness=0)
-    centerPic.grid(row=5,column=3,pady=5)
+    # centerPic=Label(label_image,image=centerImage,bg=bac,borderwidth=0,highlightthickness=0)
+    # centerPic.grid(row=5,column=3,pady=5)
     
     backButton = Button(label_image,image=backwardBackground,command= revert,bg=bac,borderwidth= 0.1,width= 30,fg= 'white')
     # pause_button.pack(padx= 10,pady= 30, anchor=CENTER)
