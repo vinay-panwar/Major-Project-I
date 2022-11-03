@@ -6,11 +6,11 @@ import pyglet as py
 bac = 'white'
 
 root = Tk()
-root.geometry('350x600')
+root.geometry('350x650')
 root.configure(background=bac)
 root.title('music recommender UI')
 root.iconbitmap(r'D:\Projects\Major Project I\Code\ICON\apple-music.ico')
-root.attributes('-alpha',0.8)
+root.attributes('-alpha',0.9)
 # root.wm_attributes("-topmost", True)
 # root.wm_attributes("-disabled", True)
 # root.wm_attributes("-transparentcolor", bac)
@@ -146,7 +146,7 @@ def main() :
 
     # extraButton = Button(label_image,image=buttonBackground,borderwidth=0)
     # extraButton.pack(padx=10,pady=30, anchor=CENTER)
-        
+    return 0 
 
-main()
-root.mainloop()
+# main()
+# root.mainloop()
