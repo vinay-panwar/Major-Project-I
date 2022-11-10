@@ -33,8 +33,8 @@ HomeFrame.pack(fill=BOTH,expand=False)
 fontFamily = 'Work Sans'
 
 # text color 
-# textColor = 'hot pink'
 textColor = 'hot pink'
+# textColor = '#00008B'
 
 def Home() :
     def remove() :
@@ -127,6 +127,7 @@ def Home() :
     question.pack(padx=10,pady=10,expand=True)
     question.insert(END,ques[0])
     question.insert(END, "\n\n") 
+    question.config(state = DISABLED)
     # variable 
     ans = IntVar()
     # Radiobutton to select yes or no for an answer
